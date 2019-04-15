@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "orchid-raven",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Orchid Raven grace shopper project",
   "engines": {
     "node": ">= 7.0.0"
   },
