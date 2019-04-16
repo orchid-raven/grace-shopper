@@ -19,3 +19,27 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.show {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+
+.nav-bar-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.dd-wrapper {
+  position: relative;
+}
+.dd-list {
+  position: absolute;
+  width: 100%;
+}
+.main-nav {
+  width: 15%;
+}
