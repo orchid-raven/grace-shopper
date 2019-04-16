@@ -24,9 +24,7 @@ export const getAllProductsThunk = () => async dispatch => {
 
 export const getAllProductsByTypeThunk = itemType => async dispatch => {
   try {
-    console.log('REDUX ITEM TYPE: ', `${itemType}`)
     const {data} = await axios.get(`/api/products/${itemType}`)
-    console.log('DATA: ', data)
     dispatch(getAllProductsByType(data))
   } catch (error) {
     console.error(error)

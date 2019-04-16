@@ -8,7 +8,6 @@ class AllProductsByType extends Component {
   }
 
   render() {
-    console.log('products inside all products by type', this.props.products)
     return (
       <div>
         {this.props.products.map(product => {
