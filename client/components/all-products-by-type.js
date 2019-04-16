@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {getAllProductsByTypeThunk} from '../store/products'
 
 class AllProductsByType extends Component {
   componentDidMount() {
-    this.props.onLoadProducts(this.props.match.params.itemType);
+    this.props.onLoadProducts(this.props.match.params.itemType)
   }
 
   render() {
-    console.log(this.props.products);
+    console.log('products inside all products by type', this.props.products)
     return (
       <div>
         {this.props.products.map(product => {
@@ -25,13 +25,13 @@ class AllProductsByType extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.products
-});
+  products: state.products.productsByType
+})
 
 const mapDispatchToProps = dispatch => ({
-  onLoadProducts: (itemType) => {
-    dispatch(getAllProductsByTypeThunk(itemType));
+  onLoadProducts: itemType => {
+    dispatch(getAllProductsByTypeThunk(itemType))
   }
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllProductsByType);
+export default connect(mapStateToProps, mapDispatchToProps)(AllProductsByType)
