@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllProductsByTypeThunk} from '../store/products'
+import {Link} from 'react-router-dom'
 
 class AllProductsByType extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class AllProductsByType extends Component {
             <div key={product.id}>
               <div>{product.name}</div>
               <img src={product.imgUrl} />
+              <Link to={`/products/${product.productType}/${product.id}`}>button</Link>
             </div>
           )
         })}
