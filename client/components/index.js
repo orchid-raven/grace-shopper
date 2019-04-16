@@ -8,3 +8,4 @@ export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 export {default as AllProducts} from './all-products'
 export {default as AllProductsByType} from './all-products-by-type'
+export {default as FeaturedProducts} from './featured';
