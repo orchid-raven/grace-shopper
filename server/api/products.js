@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 module.exports = router
 
+//GetAll
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -24,6 +25,20 @@ router.get('/:itemType/:id', async (req, res, next) => {
     if (singleProduct) {
       res.json(singleProduct)
     }
+  } catch (err) {
+    next(err)
+  }
+})
+
+// GetItemTypes
+router.get('/:itemType', async (req, res, next) => {
+  try {
+    const allItems = await Product.findAll({
+      where: {
+        productType: req.params.itemType
+      }
+    })
+    res.json(allItems)
   } catch (err) {
     next(err)
   }
