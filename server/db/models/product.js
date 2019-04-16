@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-Product = db.define('product',{
+const Product = db.define('product',{
   name: {
     type: Sequelize.STRING,
     validate: {
@@ -32,7 +32,6 @@ Product = db.define('product',{
 
 Product.loadSeed = function (encoding) {
   let prodArr = [];
-  let root = "";
   encoding.split('/').forEach(prodEncoding => {
     let prodEncodingProperty = prodEncoding.split(':');
     prodArr.push({
