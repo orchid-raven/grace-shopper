@@ -30,6 +30,23 @@ router.get('/:itemType/:id', async (req, res, next) => {
   }
 })
 
+
+// features
+
+router.get('/featured', async (req, res, next) => {
+  try {
+    const features = await Product.findAll({
+      where: {
+        featured: true
+      }
+    });
+    res.json(features);
+  } catch (error) {
+    next(error);
+  }
+})
+
+
 // GetItemTypes
 router.get('/:itemType', async (req, res, next) => {
   try {
