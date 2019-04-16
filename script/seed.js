@@ -17,7 +17,6 @@ async function seed() {
 
   const loadProducts = Product.loadSeed(encoding);
   for(let i = 0; i < loadProducts.length; i++) {
-    // console.log(`NAME: ${loadProducts[i].name} PRICE: ${loadProducts[i].price} PRODUCT-TYPE: ${loadProducts[i].productType} FEATURED: ${loadProducts[i].featured} IMGURL: ${loadProducts[i].imgUrl}`);
     await Product.create(loadProducts[i]);
   };
 

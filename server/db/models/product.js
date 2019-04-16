@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-Product = db.define('product',{
+const Product = db.define('product',{
   name: {
     type: Sequelize.STRING,
     validate: {
@@ -27,12 +27,10 @@ Product = db.define('product',{
     type: Sequelize.BOOLEAN,
     defaultValue: false
   }
-  // orderId will be created as a relationship
 });
 
 Product.loadSeed = function (encoding) {
   let prodArr = [];
-  let root = "";
   encoding.split('/').forEach(prodEncoding => {
     let prodEncodingProperty = prodEncoding.split(':');
     prodArr.push({
