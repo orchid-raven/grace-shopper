@@ -10,3 +10,16 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:itemType/:id', async (req, res, next) => {
+  try {
+    const itemType = req.params.itemType
+    const id = req.params.id
+    const singleProduct = await Product.findOne({
+      where: {productType: itemType, id: id}
+    })
+    res.json(singleProduct)
+  } catch (err) {
+    next(err)
+  }
+})
