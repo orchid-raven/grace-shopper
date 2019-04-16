@@ -13,11 +13,14 @@ router.get('/', async (req, res, next) => {
 });
 
 // GetItemTypes
-router.get('/:ItemType', async (req, res, next) => {
+router.get('/:itemType', async (req, res, next) => {
+  console.log("Inside");
   try {
+    console.log("ROUTER ITEM TYPE ", req.params.itemType);
     const allItems = await Product.findAll({ where: {
-      productType: req.params.ItemType
+      productType: req.params.itemType
     }});
+    console.log("RETURN ", allItems);
     res.json(allItems);
   } catch (err) {
     next(err)
