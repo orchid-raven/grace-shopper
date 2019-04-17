@@ -18,6 +18,8 @@ class Cart extends Component {
     })
   }
 
+  // handleCheckout
+
   async componentDidMount() {
     const {data} = await axios.get('/api/cart')
     this.setState({
