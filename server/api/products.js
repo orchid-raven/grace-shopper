@@ -31,8 +31,6 @@ router.get('/:itemType/:id', async (req, res, next) => {
 })
 
 
-// features
-
 router.get('/featured', async (req, res, next) => {
   try {
     const features = await Product.findAll({
@@ -41,6 +39,17 @@ router.get('/featured', async (req, res, next) => {
       }
     });
     res.json(features);
+  } catch (error) {
+    next(error);
+  }
+})
+
+router.put('/cart/add', async (req, res, next) => {
+  try {
+    const addToCart = req.session.cart.push(req.body);
+    // const addToCart = req.session.cart.push(456);
+    console.log(req.session.cart);
+    res.json(addToCart);
   } catch (error) {
     next(error);
   }
