@@ -9,15 +9,17 @@ class AllProducts extends Component {
 
   render() {
     return (
-      <div>
+      <div className='row'>
+      <div className='container'>
         {this.props.products.map(product => {
           return (
             <div key={product.id}>
               <div>{product.name}</div>
-              <img src={product.imgUrl} />
+             <div className='product-image'> <img src={product.imgUrl} /> </div>
             </div>
           )
         })}
+      </div>
       </div>
     )
   }
