@@ -14,4 +14,14 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+});
+
+// Add to Cart
+
+router.get('/test/', async (req, res, next) => {
+  // req.session.cart = [345]
+  // console.log(req.session)
+  req.session.cart.push(345);
+  console.log(req.session.cart);
+  res.send("worked");
 })
