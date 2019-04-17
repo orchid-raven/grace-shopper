@@ -8,13 +8,14 @@ import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
+  <div className='container'>
+    {/* <h1>BOILERMAKER</h1> */}
     <nav>
       <div className='nav-wrapper'>
       {isLoggedIn ? (
-        <div className='right'>
+        <div className='left'>
           {/* The navbar will show these links after you log in */}
+          <a href="#" className=''><img src='/images/logo/orchidRavenLogo.png'/></a>
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
