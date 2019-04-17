@@ -14,16 +14,16 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "orchid-raven-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
 
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: orchid-raven # see README
+  api_key:
+    secure: JfwRH/kBb5RVJqlAx+ajVFAI6RO1hYN4FBVGXB82KrPyfjBdv5KawVlJyu+g/dhVb7Yvd5rYruqTNdDLyVnvHoO0qvWmmMD5q9YAMvPWFBQgB7jeUtLGkFSW5LDMmWxn9mcQlphmtOXTQW/a0jD+15jskutJyjuW3fueRxsQmUcBxv8LA0l4v1Z/tnLh4NBWjsK/dlgfp5XH0l82bNK2QHwJOPngkYNaoMKVhkGEpl/xpve+z9WMjWb84DQk0Rg9jBinLfGQWBIqWT3tkYnLxYVGKrEQpvL2jVmuPFrsHNkdUwdNYnSfRgf+zyXykKqZ2vzf7iY8gUT710Tc6KdG1zU6d4pHhTeqJkoaZsUif0ygFFJEesEykQ3D/UHEPu888p16//dDVLMzJ6OfdNHQGAEc4xhCRhfrk1d8pUdnjixNSuwS0sRzOKrAC0Q9cJJxLxfrTgAvmyamYp9mW2OKVKMBx7ZezRC4faXX4HquW6SSsbH2YooKNPwYJz9/HFVjMCS5U/u9iN8FvDsLezO4XpoPvK8+8h45friZ8m+liDpf2SKFeZb7T2ZEJQz1Xhjr00ywTMTSR+/j9f6vE3GrWMn/L6p0O7B+BXZnpWtkLYpM9NA0I4cZd+ume4us9tuunZjiVmDmNDGBQKuir0hGnFGdZYRvq5Y4psfB4l8tnA4=
