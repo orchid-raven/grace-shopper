@@ -29,12 +29,12 @@ class SingleProduct extends Component {
     await axios.put('/api/products/cart/add',{
       id: product.id,
       name: product.name,
-      price: product.price
+      price: product.price,
+      imgUrl: product.imgUrl
     });
   }
 
   render() {
-    console.log('Props: ', this.props.product[0])
     let product = this.props.product[0]
     if (product) {
       return (
