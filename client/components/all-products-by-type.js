@@ -10,13 +10,15 @@ class AllProductsByType extends Component {
 
   render() {
     return (
-      <div>
+      <div className="products-by-type">
         {this.props.products.map(product => {
           return (
-            <div key={product.id}>
+            <div className="single-product-by-type" key={product.id}>
               <div>{product.name}</div>
               <img src={product.imgUrl} />
-              <Link to={`/products/${product.productType}/${product.id}`}>button</Link>
+              <Link to={`/products/${product.productType}/${product.id}`}>
+                button
+              </Link>
             </div>
           )
         })}
