@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/products'
-import axios from 'axios';
+import axios from 'axios'
 
 class SingleProduct extends Component {
   // constructor() {
@@ -16,33 +16,43 @@ class SingleProduct extends Component {
     )
   }
 
-  handleAddToCart = async (evt) => {
+  handleAddToCart = async evt => {
     // prevent default if submit
     // take our current product
     // find product id
     // push that product ID into cart - use route somehow
     // allow dupes
 
-    evt.preventDefault();
-    let product = this.props.product[0];
+    evt.preventDefault()
+    let product = this.props.product[0]
     //invoke addToCart route
-    await axios.put('/api/products/cart/add',{
+    await axios.put('/api/cart/add', {
       id: product.id,
       name: product.name,
       price: product.price,
       imgUrl: product.imgUrl
-    });
+    })
   }
 
   render() {
     let product = this.props.product[0]
+    console.log('PRODUCT -> ', product)
     if (product) {
       return (
-        <div>
-          {this.props.product[0].name}
-          <div>
+        <div className="single-product-item">
           <img src={this.props.product[0].imgUrl} />
-          <button type = "submit" onClick={this.handleAddToCart}>Add To Cart</button>
+
+          <div className="single-product-content">
+            <div>{this.props.product[0].name}</div>
+            <div className="price">Price: ${product.price} </div>
+
+            <button
+              className="add-to-cart"
+              type="submit"
+              onClick={this.handleAddToCart}
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       )
