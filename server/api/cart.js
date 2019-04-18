@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
 const {OrderProduct} = require('../db/models')
+const {AcquireCart} = require('../utilities');
 
 module.exports = router
 
@@ -53,8 +54,11 @@ router.get('/checkout', async (req, res, next) => {
       console.log("Please log in before checking out");
       res.redirect('/login');
     }
+    else if (req.session.cart.length === 0) {
+      console.log("Cannot checkout on Empty Cart");
+      res.redirect('/home');
+    }
     else {
-      console.log()
       let currentCart = req.session.cart;
 
       // Tier 3
@@ -102,7 +106,7 @@ router.get('/checkout', async (req, res, next) => {
           price: ordprodPair.price + currentCart[i].price    /* 3 roses before worth $12 each and we're adding another rose; price goes from $36 to $48 */
         });
 
-        ordertotalPrice += currentCart[i].price;  /* Plus the above, we have 2 seeds worth $20 each; totalPrice goes from $56 to $68 */
+        ordertotalPrice += currentCart[i].price;             /* Plus the above, we have 2 seeds worth $20 each; totalPrice goes from $56 to $68 */
       };
 
       await newOrder.update({
@@ -116,4 +120,8 @@ router.get('/checkout', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+router.get('/testground', async (req, res, next) => {
+  AcquireCart(req.session);
 })
