@@ -24,5 +24,5 @@ const OrderProduct = require('./order-product');
  Product.belongsToMany(Order, {through: OrderProduct});
 
 module.exports = {
-  User, Product, Order
+  User, Product, Order, OrderProduct
 }
