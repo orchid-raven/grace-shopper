@@ -40,18 +40,3 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-
-.userhome-container{
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.home-featured-products{
-  width: auto;
-  padding: 5px;
-}
-
-.featured-products-name{
-  width: 100%;
-  align-self: flex-end;
-}
