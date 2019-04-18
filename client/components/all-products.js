@@ -9,13 +9,12 @@ class AllProducts extends Component {
 
   render() {
     return (
-      <div className='row'>
-      <div className='container'>
+      <div className="products-container">
         {this.props.products.map(product => {
           return (
-            <div key={product.id}>
-              <div>{product.name}</div>
-             <div className='product-image'> <img src={product.imgUrl} /> </div>
+            <div className="single-product" key={product.id}>
+              <div className="product-name">{product.name}</div>
+              <img src={product.imgUrl} />
             </div>
           )
         })}
