@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {getAllCartItemsThunk, deleteCartItemThunk} from '../store/cart'
+import {connect} from 'react-redux'
 
 class Cart extends Component {
   constructor() {
@@ -9,32 +11,40 @@ class Cart extends Component {
     }
   }
 
-  handleRemoveFromCart = async evt => {
-    let {data} = await axios.put('/api/cart/delete', {
-      id: evt.target.value
-    })
-    this.setState({
-      cart: data
-    })
-  }
-
+  // handleRemoveFromCart = async evt => {
+  //   let {data} = await axios.put('/api/cart/delete', {
+  //     id: evt.target.value
+  //   })
+  //   this.setState({
+  //     cart: data
+  //   })
+  // }
+  // handleRemoveFromCart = evt => {
+  //   this.props.onDeleteItem()
+  // }
   // handleCheckout
 
-  async componentDidMount() {
-    const {data} = await axios.get('/api/cart')
-    this.setState({
-      cart: data
-    })
+  // async componentDidMount() {
+  //   const {data} = await axios.get('/api/cart')
+  //   this.setState({
+  //     cart: data
+  //   })
+  // }
+
+  // moves the state to redux so we can get it in the main nav
+  componentDidMount() {
+    this.props.onLoadCart()
   }
 
   render() {
-    if (this.state.cart.length > 0) {
+    console.log('state props!! ', this.props)
+    if (this.props.cart.length > 0) {
       return (
         <div className="cart-container">
           <div className="shopping-cart-label">
-            Shopping Cart({this.state.cart.length})
+            Shopping Cart({this.props.cart.length})
           </div>
-          {this.state.cart.map(product => {
+          {this.props.cart.map(product => {
             return (
               <div className="single-cart-item" key={product.id}>
                 <img src={product.imgUrl} />
@@ -45,7 +55,7 @@ class Cart extends Component {
                     className="remove-from-cart"
                     type="button"
                     value={product.id}
-                    onClick={this.handleRemoveFromCart}
+                    onClick={this.props.onDeleteItem}
                   >
                     Remove
                   </button>
@@ -60,5 +70,19 @@ class Cart extends Component {
     }
   }
 }
+const mapStateToProps = state => ({
+  cart: state.cart.cart
+})
 
-export default Cart
+const mapDispatchToProps = dispatch => ({
+  onLoadCart: () => {
+    dispatch(getAllCartItemsThunk())
+  },
+  onDeleteItem: evt => {
+    let id = evt.target.value
+    console.log(id)
+    dispatch(deleteCartItemThunk(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
