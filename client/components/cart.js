@@ -10,7 +10,7 @@ class Cart extends Component {
   }
 
   handleRemoveFromCart = async evt => {
-    let {data} = await axios.put('/api/products/cart/delete', {
+    let {data} = await axios.put('/api/cart/delete', {
       id: evt.target.value
     })
     this.setState({
@@ -18,8 +18,10 @@ class Cart extends Component {
     })
   }
 
+  // handleCheckout
+
   async componentDidMount() {
-    const {data} = await axios.get('/api/products/cart')
+    const {data} = await axios.get('/api/cart')
     this.setState({
       cart: data
     })
