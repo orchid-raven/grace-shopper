@@ -35,19 +35,26 @@ class Cart extends Component {
   render() {
     if (this.state.cart.length > 0) {
       return (
-        <div>
+        <div className="cart-container">
+          <div className="shopping-cart-label">
+            Shopping Cart({this.state.cart.length})
+          </div>
           {this.state.cart.map(product => {
             return (
-              <div key={product.id}>
-                <div>{product.name}</div>
-                <div>Price: {product.price/100}</div>
+              <div className="single-cart-item" key={product.id}>
                 <img src={product.imgUrl} />
-                <button
-                  type="button"
-                  value={product.id}
-                  onClick={this.handleRemoveFromCart}>
-                  Remove
-                </button>
+                <div className="single-cart-content">
+                  <div>{product.name}</div>
+                  <div>Price: {product.price/100}</div>
+                  <button
+                    className="remove-from-cart"
+                    type="button"
+                    value={product.id}
+                    onClick={this.handleRemoveFromCart}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             )
           })}
