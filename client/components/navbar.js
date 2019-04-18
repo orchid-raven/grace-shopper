@@ -12,8 +12,24 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       </Link>
       <div>
         <div className="nav-left">
-          <Link to="/products/featured">Featured Products</Link>
-          <Link to="/products">All Products</Link>
+          <Link className="nav-item" to="/products/featured">
+            Featured Products
+          </Link>
+          <Link className="nav-item" to="/products">
+            All Products
+          </Link>
+          <Link className="nav-item" to="/products/flower">
+            Flowers
+          </Link>
+          <Link className="nav-item" to="/products/seed">
+            Seeds
+          </Link>
+          <Link className="nav-item" to="/products/pot">
+            Pots
+          </Link>
+          <Link className="nav-item" to="/products/gardening%20equipment">
+            Gardening Equipment
+          </Link>
         </div>
       </div>
       {isLoggedIn ? (
@@ -22,14 +38,18 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-          <Link to="/cart">Cart<i className="fas fa-shopping-cart"></i></Link>
+          <Link to="/cart">
+            Cart<i className="fas fa-shopping-cart" />
+          </Link>
         </div>
       ) : (
         <div className="nav-right">
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/cart">Cart<i className="fas fa-shopping-cart"></i></Link>
+          <Link to="/cart">
+            Cart<i className="fas fa-shopping-cart" />
+          </Link>
         </div>
       )}
     </nav>
