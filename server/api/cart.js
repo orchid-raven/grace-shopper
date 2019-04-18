@@ -53,33 +53,31 @@ router.get('/checkout', async (req, res, next) => {
       console.log("Please log in before checking out");
       res.redirect('/login');
     }
-    else if (req.session.cart.length === 0) {
-      console.log("Cannot checkout on Empty Cart");
-      res.redirect('/home');
-    }
     else {
       console.log()
       let currentCart = req.session.cart;
 
       // Tier 3
       // find if an old version currently exists
+      let newOrder = await Order.findOne({where:{
+        userId: req.session.passport.user,
+        completedFlag: false
+      }})
 
-      let newOrder = await Order.create({
-        userId: req.session.passport.user
-      });
+      if (!newOrder) {
+        newOrder = await Order.create({
+          userId: req.session.passport.user
+        });
+      }
 
-      // A User may only have ONE incomplete order --- This is the cart at login / checkout / logout
-
-      // Tier 3 Accidental Material
       // Erase products that were used for login purposes - We need this to be zero to update our order with current cart
       // Possibly move this to login when checking for any existing cart
-
-      // let prevProductsToClear = await OrderProduct.findAll({where: {
-      //   orderId: newOrder.id
-      // }});
-      // for(let i = 0; i < prevProductsToClear.length; i++) {
-      //   await prevProductsToClear[i].destroy();
-      // }
+      let prevProductsToClear = await OrderProduct.findAll({where: {
+        orderId: newOrder.id
+      }});
+      for(let i = 0; i < prevProductsToClear.length; i++) {
+        await prevProductsToClear[i].destroy();
+      }
 
       // Add each product currently on cart
       let ordertotalPrice = 0;
@@ -113,9 +111,7 @@ router.get('/checkout', async (req, res, next) => {
       });
 
       req.session.cart = [];
-      console.log("NEW CART ----->", req.session.cart);
-      console.log("NEW ORDER ----->", newOrder);
-      res.json(newOrder);
+      res.json([]);
     }
   } catch (error) {
     next(error);

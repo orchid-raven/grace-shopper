@@ -1,5 +1,8 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Order = require('../db/models/order')
+const OrderProduct = require('../db/models/order-product')
+
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -38,6 +41,7 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   // insert cart productsId to uncompleted order for user
+
   req.logout()
   req.session.destroy()
   res.redirect('/')

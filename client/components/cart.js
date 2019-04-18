@@ -18,10 +18,15 @@ class Cart extends Component {
     })
   }
 
-  // handleCheckout
+  handleCheckoutCart = async () => {
+    const {data} = await axios.get('/api/cart/checkout');
+    this.setState({
+      cart: data
+    })
+  }
 
   async componentDidMount() {
-    const {data} = await axios.get('/api/cart')
+    const {data} = await axios.get('/api/cart');
     this.setState({
       cart: data
     })
@@ -35,18 +40,24 @@ class Cart extends Component {
             return (
               <div key={product.id}>
                 <div>{product.name}</div>
-                <div>Price: {product.price}</div>
+                <div>Price: {product.price/100}</div>
                 <img src={product.imgUrl} />
                 <button
                   type="button"
                   value={product.id}
-                  onClick={this.handleRemoveFromCart}
-                >
+                  onClick={this.handleRemoveFromCart}>
                   Remove
                 </button>
               </div>
             )
           })}
+          <div>
+            <button
+              type="button"
+              onClick={this.handleCheckoutCart}>
+              Checkout Cart
+            </button>
+          </div>
         </div>
       )
     } else {
