@@ -26,7 +26,7 @@ class SingleProduct extends Component {
     evt.preventDefault();
     let product = this.props.product[0];
     //invoke addToCart route
-    await axios.put('/api/products/cart/add',{
+    await axios.put('/api/cart/add',{
       id: product.id,
       name: product.name,
       price: product.price,

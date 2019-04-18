@@ -10,6 +10,27 @@ label {
   display: block;
 }
 
+nav {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  border: 1px solid black;
+  font: bold 20px Arial;
+  margin-bottom: 1%;
+}
+
+nav img {
+  width: 100px;
+  height: 50px;
+}
+
+.nav-right {
+  display: flex;
+  margin-left: auto;
+  margin-right: 1%;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
@@ -20,6 +41,7 @@ form div {
   display: inline-block;
 }
 
+<<<<<<< HEAD
 .userhome-container{
   display: flex;
   justify-content: space-evenly;
@@ -34,3 +56,5 @@ form div {
   width: 100%;
   align-self: flex-end;
 }
+=======
+>>>>>>> master
