@@ -2,6 +2,7 @@ const router = require('express').Router()
 const User = require('../db/models/user')
 const Order = require('../db/models/order')
 const OrderProduct = require('../db/models/order-product')
+const {AcquireCart, ClearIncompleteOrder} = require('../utilities')
 
 module.exports = router
 
@@ -12,14 +13,19 @@ router.post('/login', async (req, res, next) => {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
 
-      // check if user has an uncompleted order. if yes, move this to cart
 
     } else if (!user.correctPassword(req.body.password)) {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      // req.session.cart = []; //create user cart
-      req.login(user, err => (err ? next(err) : res.json(user)))
+      await req.login(user, err => (err ? next(err) : res.json(user)))
+      // check if user has an uncompleted order. if yes, move this to cart
+
+      //gotta put this elsewhere --- Session gets reset at logout
+      // let newCart = await AcquireCart(req.session);
+      // req.session.cart = newCart;
+      // console.log("NEW CART ------> ", req.session.cart);
+      // ClearIncompleteOrder(req.session);
     }
   } catch (err) {
     next(err)

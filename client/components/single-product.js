@@ -33,7 +33,7 @@ class SingleProduct extends Component {
 
           <div className="single-product-content">
             <div>{this.props.product[0].name}</div>
-            <div className="price">Price: ${product.price} </div>
+            <div className="price">Price: ${product.price/100} </div>
 
             <button
               className="add-to-cart"

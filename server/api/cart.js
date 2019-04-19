@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
 const {OrderProduct} = require('../db/models')
-const {AcquireCart} = require('../utilities');
+const {AcquireCart, ClearIncompleteOrder} = require('../utilities');
 
 module.exports = router
 
@@ -121,6 +121,15 @@ router.get('/checkout', async (req, res, next) => {
     next(error);
   }
 });
+
+// router.get('/load', async (req, res, next) => {
+//   console.log("On Load");
+//   let newCart = await AcquireCart(req.session);
+//   req.session.cart = newCart;
+//   console.log("NEW CART ------> ",req.session.cart);
+//   ClearIncompleteOrder(req.session);
+//   res.send(newCart);
+// });
 
 router.get('/testground', async (req, res, next) => {
   AcquireCart(req.session);
