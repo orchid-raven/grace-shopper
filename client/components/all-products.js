@@ -19,7 +19,6 @@ class AllProducts extends Component {
           )
         })}
       </div>
-      </div>
     )
   }
 }
