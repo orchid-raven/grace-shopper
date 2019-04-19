@@ -1,6 +1,4 @@
 const router = require('express').Router()
-const {Order} = require('../db/models')
-const {OrderProduct} = require('../db/models')
 const {AcquireCart, ClearIncompleteOrder, PopulateIncompleteOrder} = require('../utilities');
 
 module.exports = router
