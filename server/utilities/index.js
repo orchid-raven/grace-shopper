@@ -11,7 +11,6 @@ const AcquireCart = async (session) => {
   if(prevOrder) {
     let cartProducts = await prevOrder.getProducts(); //an array
     console.log("ARRAY OF CART PRODUCTS -----> ",cartProducts);
-    console.log("order-product prop ---------> " ,cartProducts[0]['order-product'].quantity);
 
     for(let i = 0; i < cartProducts.length; i++) {
       for(let n = 0; n < cartProducts[i]['order-product'].quantity; n++) {
@@ -45,6 +44,8 @@ const ClearIncompleteOrder = async (session) => {
     }
   }
 }
+
+
 
 module.exports = {
   ClearIncompleteOrder, AcquireCart

@@ -122,14 +122,21 @@ router.get('/checkout', async (req, res, next) => {
   }
 });
 
-// router.get('/load', async (req, res, next) => {
-//   console.log("On Load");
-//   let newCart = await AcquireCart(req.session);
-//   req.session.cart = newCart;
-//   console.log("NEW CART ------> ",req.session.cart);
-//   ClearIncompleteOrder(req.session);
-//   res.send(newCart);
-// });
+router.get('/load', async (req, res, next) => {
+  console.log("On Load");
+  try {
+    let newCart = await AcquireCart(req.session);
+    for (let i = 0; i < newCart.length; i++) {
+      req.session.cart.push(newCart[i]);
+    }
+    console.log("NEW CART ------> ",req.session.cart);
+    ClearIncompleteOrder(req.session);
+    res.send(newCart);
+
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get('/testground', async (req, res, next) => {
   AcquireCart(req.session);
