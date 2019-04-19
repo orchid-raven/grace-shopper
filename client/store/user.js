@@ -49,7 +49,7 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    await axios.get('/api/cart/load');
+    await axios.get('/api/cart/retrieveCart');
   } catch (error) {
     console.log("cart from incomplete order did not load")
   }
@@ -58,6 +58,7 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
+    await axios.get('/api/cart/archiveCart')
     await axios.post('/auth/logout')
     dispatch(removeUser())
     history.push('/login')

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Order} = require('../db/models')
 const {OrderProduct} = require('../db/models')
-const {AcquireCart, ClearIncompleteOrder} = require('../utilities');
+const {AcquireCart, ClearIncompleteOrder, PopulateIncompleteOrder} = require('../utilities');
 
 module.exports = router
 
@@ -48,7 +48,7 @@ router.put('/delete', (req, res, next) => {
   }
 })
 
-router.get('/checkout', async (req, res, next) => {
+router.get('/checkout', (req, res, next) => {
   try {
     if(!req.session.passport) {
       console.log("Please log in before checking out");
@@ -59,61 +59,7 @@ router.get('/checkout', async (req, res, next) => {
       res.redirect('/home');
     }
     else {
-      let currentCart = req.session.cart;
-
-      // Tier 3
-      // find if an old version currently exists
-      let newOrder = await Order.findOne({where:{
-        userId: req.session.passport.user,
-        completedFlag: false
-      }})
-
-      if (!newOrder) {
-        newOrder = await Order.create({
-          userId: req.session.passport.user
-        });
-      }
-
-      // Erase products that were used for login purposes - We need this to be zero to update our order with current cart
-      // Possibly move this to login when checking for any existing cart
-      let prevProductsToClear = await OrderProduct.findAll({where: {
-        orderId: newOrder.id
-      }});
-      for(let i = 0; i < prevProductsToClear.length; i++) {
-        await prevProductsToClear[i].destroy();
-      }
-
-      // Add each product currently on cart
-      let ordertotalPrice = 0;
-      for(let i = 0; i < currentCart.length; i++) {
-
-        // see if the order-product pair exists
-        let ordprodPair = await OrderProduct.findOne({ where: {
-          orderId: newOrder.id,
-          productId: currentCart[i].id,
-        }});
-
-        // if does not exist, create pair
-        if(!ordprodPair) {
-          ordprodPair = await OrderProduct.create({
-            orderId: newOrder.id,
-            productId: currentCart[i].id,
-          });
-        }
-
-        await ordprodPair.update({
-          quantity: ordprodPair.quantity + 1,                /* 3 roses before. Plus one, we now have 4 */
-          price: ordprodPair.price + currentCart[i].price    /* 3 roses before worth $12 each and we're adding another rose; price goes from $36 to $48 */
-        });
-
-        ordertotalPrice += currentCart[i].price;             /* Plus the above, we have 2 seeds worth $20 each; totalPrice goes from $56 to $68 */
-      };
-
-      await newOrder.update({
-        completedFlag: true,
-        totalPrice: ordertotalPrice
-      });
-
+      PopulateIncompleteOrder(req.session, true);
       req.session.cart = [];
       res.json([]);
     }
@@ -122,8 +68,7 @@ router.get('/checkout', async (req, res, next) => {
   }
 });
 
-router.get('/load', async (req, res, next) => {
-  console.log("On Load");
+router.get('/retrieveCart', async (req, res, next) => {
   try {
     let newCart = await AcquireCart(req.session);
     for (let i = 0; i < newCart.length; i++) {
@@ -137,6 +82,17 @@ router.get('/load', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/archiveCart', (req, res, next) => {
+  try {
+    if (req.session.cart.length > 0) {
+      PopulateIncompleteOrder(req.session, false);
+      res.json([]);
+    }
+  } catch (error) {
+    next(error);
+  }
+})
 
 router.get('/testground', async (req, res, next) => {
   AcquireCart(req.session);
