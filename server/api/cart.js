@@ -83,10 +83,8 @@ router.get('/retrieveCart', async (req, res, next) => {
 
 router.get('/archiveCart', (req, res, next) => {
   try {
-    if (req.session.cart.length > 0) {
-      PopulateIncompleteOrder(req.session, false);
-      res.json([]);
-    }
+    PopulateIncompleteOrder(req.session, false);
+    res.json([]);
   } catch (error) {
     next(error);
   }

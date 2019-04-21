@@ -59,14 +59,19 @@ export const auth = (email, password, method) => async dispatch => {
 export const logout = () => async dispatch => {
 
   try {
+    console.log("Saving Cart");
     await axios.get('/api/cart/archiveCart')
+
   }
   catch (error){
     console.log(error);
   }
+
   try {
+    console.log("Logging Out")
     await axios.post('/auth/logout')
     dispatch(removeUser())
+    console.log("Logout complete")
     history.push('/login')
   } catch (err) {
     console.error(err)
