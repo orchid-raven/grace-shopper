@@ -4,10 +4,6 @@ import {getSingleProductThunk} from '../store/products'
 import axios from 'axios'
 
 class SingleProduct extends Component {
-  // constructor() {
-  //   super();
-  //   this.handleAddToCart = this.bind.handleAddToCart(this);
-  // }
 
   componentDidMount() {
     this.props.onloadProduct(
@@ -16,17 +12,10 @@ class SingleProduct extends Component {
     )
   }
 
-  handleAddToCart = async evt => {
-    // prevent default if submit
-    // take our current product
-    // find product id
-    // push that product ID into cart - use route somehow
-    // allow dupes
-
-    evt.preventDefault()
-    let product = this.props.product[0]
-    //invoke addToCart route
-    await axios.put('/api/cart/add', {
+  handleAddToCart = async (evt) => {
+    evt.preventDefault();
+    let product = this.props.product[0];
+    await axios.put('/api/cart/add',{
       id: product.id,
       name: product.name,
       price: product.price,
@@ -44,7 +33,7 @@ class SingleProduct extends Component {
 
           <div className="single-product-content">
             <div>{this.props.product[0].name}</div>
-            <div className="price">Price: ${product.price} </div>
+            <div className="price">Price: ${product.price/100} </div>
 
             <button
               className="add-to-cart"
