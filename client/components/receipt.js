@@ -10,6 +10,7 @@ import axios from 'axios'
 //  - Price
 //  - Item Total
 
+// The way we pull from our redux may get dicey, so let's discuss this together!
 
 class OrderReceipt extends Component {
 
@@ -22,7 +23,7 @@ class OrderReceipt extends Component {
     return (
     <div>
       <h3>Order Receipt</h3>
-      <h5>Invoice Number: {/* order */}</h5>
+      <h5>Invoice Number: {/* order.id */}</h5>
       <table>
         <tr>
           <th>Item Name</th>
@@ -30,6 +31,7 @@ class OrderReceipt extends Component {
           <th>Price</th>
           <th>Item Total</th>
         </tr>
+
         {/* products.map(product => (
 
           <tr>
@@ -40,6 +42,14 @@ class OrderReceipt extends Component {
           </tr>
 
           ))
+        */}
+        {/*
+
+          <tr>
+            <td colspan="3">Grand Total: </td>
+            <td>`$${order.totalPrice}`</td>
+          </tr>
+
         */}
       </table>
     </div>);
