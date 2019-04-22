@@ -51,7 +51,7 @@ class SingleProduct extends Component {
             <button
               className="add-to-cart"
               type="submit"
-              onClick={this.props.onAddToCart(product)}
+              onClick={() => this.props.onAddToCart(product)}
             >
               Add To Cart
             </button>
