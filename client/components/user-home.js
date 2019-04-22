@@ -17,15 +17,20 @@ class UserHome extends Component {
       // <div>
       //   <h3>Welcome, {email}</h3>
       // </div>
-      <div className="userhome-container">
-        {this.props.featuredProducts.map(product => {
-          return (
-            <div className='home-featured-products' key={product.id}>
-              <div className='featured-products-name'>{product.name}</div>
-             <div className='product-image'> <img src={product.imgUrl} /> </div>
-            </div>
-          )
-        })}
+      <div>
+        <h2 className="featured-products-label">Featured Products</h2>
+        <div className="featured-container">
+          {this.props.featuredProducts.map(product => {
+            return (
+              <div className="featured-products" key={product.id}>
+                <div>{product.name}</div>
+                <div>
+                  <img src={product.imgUrl} />{' '}
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
