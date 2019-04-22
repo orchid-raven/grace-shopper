@@ -1,51 +1,35 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import {
+  getCartItemsThunk,
+  checkoutCartThunk,
+  removeFromCartThunk
+} from '../store/cart'
+import {connect} from 'react-redux'
 
 class Cart extends Component {
-  constructor() {
-    super()
-    this.state = {
-      cart: []
-    }
-  }
-
-  handleRemoveFromCart = async evt => {
-    let {data} = await axios.put('/api/cart/delete', {
-      id: evt.target.value
-    })
-    this.setState({
-      cart: data
-    })
-  }
-
-  // handleCheckout
-
-  async componentDidMount() {
-    const {data} = await axios.get('/api/cart')
-    this.setState({
-      cart: data
-    })
+  componentDidMount() {
+    this.props.onloadCart()
   }
 
   render() {
-    if (this.state.cart.length > 0) {
+    if (this.props.cart.length > 0) {
       return (
         <div className="cart-container">
           <div className="shopping-cart-label">
-            Shopping Cart({this.state.cart.length})
+            Shopping Cart({this.props.cart.length})
           </div>
-          {this.state.cart.map(product => {
+          {this.props.cart.map(product => {
             return (
               <div className="single-cart-item" key={product.id}>
                 <img src={product.imgUrl} />
                 <div className="single-cart-content">
                   <div>{product.name}</div>
-                  <div>Price: {product.price}</div>
+                  <div>Price: {product.price / 100}</div>
                   <button
                     className="remove-from-cart"
                     type="button"
                     value={product.id}
-                    onClick={this.handleRemoveFromCart}
+                    onClick={() => this.props.onDelete(product.id)}
                   >
                     Remove
                   </button>
@@ -53,6 +37,11 @@ class Cart extends Component {
               </div>
             )
           })}
+          <div>
+            <button type="button" onClick={this.props.onCheckout}>
+              Checkout Cart
+            </button>
+          </div>
         </div>
       )
     } else {
@@ -60,5 +49,19 @@ class Cart extends Component {
     }
   }
 }
+const mapStateToProps = state => ({
+  cart: state.cart.cart
+})
 
-export default Cart
+const mapDispatchToProps = dispatch => ({
+  onloadCart: () => {
+    dispatch(getCartItemsThunk())
+  },
+  onCheckout: () => {
+    dispatch(checkoutCartThunk())
+  },
+  onDelete: id => {
+    dispatch(removeFromCartThunk(id))
+  }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

@@ -18,9 +18,6 @@ class Navbar extends Component {
           </Link>
           <div>
             <div className="nav-left">
-              <Link className="nav-item" to="/products/featured">
-                Featured Products
-              </Link>
               <Link className="nav-item" to="/products">
                 All Products
               </Link>

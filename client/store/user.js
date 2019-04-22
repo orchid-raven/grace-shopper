@@ -33,23 +33,45 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
+    console.log("get axios auth Line");
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
 
+
   try {
+    console.log("get User Line");
     dispatch(getUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
+
+  try {
+    await axios.get('/api/cart/retrieveCart');
+  } catch (error) {
+    console.log("cart from incomplete order did not load")
+  }
+
 }
 
 export const logout = () => async dispatch => {
+
   try {
+    console.log("Saving Cart");
+    await axios.get('/api/cart/archiveCart')
+
+  }
+  catch (error){
+    console.log(error);
+  }
+
+  try {
+    console.log("Logging Out")
     await axios.post('/auth/logout')
     dispatch(removeUser())
+    console.log("Logout complete")
     history.push('/login')
   } catch (err) {
     console.error(err)
