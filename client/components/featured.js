@@ -1,23 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getFeaturedProductsThunk} from '../store/products';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {getFeaturedProductsThunk} from '../store/products'
 
-class FeaturedProducts extends Component{
+class FeaturedProducts extends Component {
   componentDidMount() {
-    this.props.onLoadProducts();
+    this.props.onLoadProducts()
   }
 
   render() {
     return (
       <div>
-        {this.props.products.map(product => {
-          return (
-            <div key={product.id}>
-              <div>{product.name}</div>
-              <img src={product.imgUrl} />
-            </div>
-          )
-        })}
+        <h2 className="featured-products-label">Featured Products</h2>
+        <div className="featured-container">
+          {this.props.products.map(product => {
+            return (
+              <div className="featured-product" key={product.id}>
+                <div>{product.name}</div>
+                <img src={product.imgUrl} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
@@ -33,4 +36,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect (mapStateToProps, mapDispatchToProps) (FeaturedProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(FeaturedProducts)
