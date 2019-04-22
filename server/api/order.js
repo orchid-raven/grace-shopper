@@ -4,6 +4,13 @@ const Product = require('../db/models/product');
 
 module.exports = router
 
+router.get('/History', async (req, res, next) => {
+  let history = await Order.findAll({
+    include: [{model: Product}]
+  });
+  res.json(history);
+});
+
 router.get('/:orderId', async (req, res, next) => {
   let newOrder = await Order.findAll({
     where:{
@@ -14,3 +21,10 @@ router.get('/:orderId', async (req, res, next) => {
   res.json(newOrder);
 });
 
+router.delete('/ClearHistory', async (req, res, next) => {
+  let history = await Order.findAll({
+    include: [{model: Product}]
+  });
+  await history.destroy();
+  res.send();
+})
