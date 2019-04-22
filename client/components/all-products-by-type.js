@@ -24,8 +24,8 @@ class AllProductsByType extends Component {
 
               <Link to={`/products/${product.productType}/${product.id}`}>
                 <img src={product.imgUrl} />
+                <div className="overlay"> View {product.name}! </div>
               </Link>
-              <div className="overlay"> View {product.name}! </div>
             </div>
           )
         })}
