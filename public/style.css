@@ -70,8 +70,15 @@ form div {
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
+  position: relative;
 }
+
+.single-product:hover .overlay {
+  opacity: 1;
+  pointer-events: none;
+}
+
 .single-product img {
   max-width: 295px;
   max-height: 174px;
@@ -79,7 +86,9 @@ form div {
 .product-name {
   width: 100%;
   align-self: flex-end;
+  text-align: center;
 }
+
 a > img {
   max-width: 100%;
   max-width: 298px;
@@ -97,7 +106,6 @@ a > img {
   width: 100%;
   text-align: center;
 }
-
 .single-product-by-type {
   width: 25%;
   margin: 5px;
@@ -113,7 +121,6 @@ a > img {
   opacity: 1;
   pointer-events: none;
 }
-
 .overlay {
   position: absolute;
   top: 0;
