@@ -323,15 +323,15 @@ a > img {
 
 .google-btn {
   margin: 25px;
-    width: 80%;
-    min-width: 220px;
-    max-width: 220px;
-    height: 42px;
-    background-color: #fcfcfc;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
-    display: flex;
-    padding: 0px 0px 0px 15px;
+  width: 80%;
+  min-width: 220px;
+  max-width: 220px;
+  height: 42px;
+  background-color: #fcfcfc;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+  display: flex;
+  padding: 0px 0px 0px 15px;
 }
 .google-icon-wrapper {
   position: absolute;
@@ -356,4 +356,34 @@ a > img {
   color: #757575;
   font-size: 18px;
   font-family: Arial;
+}
+
+.ReceiptContainer {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.ReceiptHeading{
+  display: flex;
+  justify-content: space-between;
+}
+
+th {
+  background-color: #4f0d91;
+  color: whitesmoke;
+}
+
+td {
+  background-color: #b3c6e5;
+}
+
+td, th {
+  padding: 5px 15px 5px 15px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 5px;
+  border-color: #4f0d91;
 }

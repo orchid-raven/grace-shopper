@@ -11,3 +11,4 @@ export {default as SingleProduct} from './single-product'
 export {default as AllProductsByType} from './all-products-by-type'
 export {default as FeaturedProducts} from './featured';
 export {default as Cart} from './cart';
+export {default as Receipt} from './receipt';

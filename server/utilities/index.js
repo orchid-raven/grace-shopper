@@ -1,4 +1,4 @@
-const {Order, OrderProduct} = require('../db/models/');
+const {Order, OrderProduct, Product} = require('../db/models/');
 
 const AcquireCart = async (session) => {
 
@@ -8,21 +8,19 @@ const AcquireCart = async (session) => {
   let prevOrder = await Order.findOne({where:{
     userId: session.passport.user,
     completedFlag: false
-  }});
+  },
+    include: [{model: Product}]
+});
 
   if(prevOrder) {
-    // Finds all products related to the order
-    let cartProducts = await prevOrder.getProducts(); //an array
-    console.log("ARRAY OF CART PRODUCTS -----> ",cartProducts);
-
     // Pushes each ( products X product.quantity ) into cart array
-    for(let i = 0; i < cartProducts.length; i++) {
-      for(let n = 0; n < cartProducts[i]['order-product'].quantity; n++) {
+    for(let i = 0; i < prevOrder.products.length; i++) {
+      for(let n = 0; n < prevOrder.products[i]['order-product'].quantity; n++) {
         cart.push({
-          id: cartProducts[i].id,
-          name: cartProducts[i].name,
-          price: cartProducts[i].price,
-          imgUrl: cartProducts[i].imgUrl
+          id: prevOrder.products[i].id,
+          name: prevOrder.products[i].name,
+          price: prevOrder.products[i].price,
+          imgUrl: prevOrder.products[i].imgUrl
         })
       }
     }
@@ -38,7 +36,8 @@ const ClearIncompleteOrder = async (session) => {
   let prevOrder = await Order.findOne({where:{
     userId: session.passport.user,
     completedFlag: false
-  }});
+  }
+});
 
   if(prevOrder) {
 
@@ -105,6 +104,7 @@ const PopulateIncompleteOrder = async (session, completedFlag) => {
       totalPrice: ordertotalPrice
     });
 
+    return newOrder.id;
   }
 
 }
