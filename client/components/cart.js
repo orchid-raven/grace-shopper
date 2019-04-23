@@ -38,7 +38,7 @@ class Cart extends Component {
             )
           })}
           <div>
-            <button type="button" onClick={this.props.onCheckout}>
+            <button type="button" onClick={this.props.onCheckout} className='checkout-cart'>
               Checkout Cart
             </button>
           </div>

@@ -185,7 +185,8 @@ a > img {
   margin-left: 20px;
 }
 .add-to-cart,
-.remove-from-cart {
+.remove-from-cart,
+.checkout-cart {
   padding: 10px;
   border: 2px solid lightblue;
   font-size: 12px;
@@ -283,5 +284,76 @@ a > img {
   max-height: 130px;
   max-width: 175px;
 }
-.featured-product {
+
+.welcome-box{
+  border: 1px solid burlywood;
+  margin: 0 4em 0 4em;
+  padding: 0 0 0 15px;
+  background-color: peachpuff;
+}
+
+.form-signup-login{
+  border: 1px solid rgb(165, 154, 154);
+  margin: 0 30% 0 30%;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 222, 205);
+}
+
+.form-fields{
+  display:flex;
+  flex-direction: column;
+  font: 25px Arial;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+}
+
+.form-fields button{
+  padding: 16px 32px 16px 32px;
+  border: 2px solid lightblue;
+  font: 20px Arial;
+}
+
+.form-fields input{
+  padding: 10px 50px 10px 50px;
+  font: 20px Arial;
+}
+
+.google-btn {
+  margin: 25px;
+    width: 80%;
+    min-width: 220px;
+    max-width: 220px;
+    height: 42px;
+    background-color: #fcfcfc;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+    display: flex;
+    padding: 0px 0px 0px 15px;
+}
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  user-select: none
+}
+.google-icon-svg {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+  user-select: none
+}
+.google-btn .btn-text {
+  float: right;
+  margin: 11px 14px 40px 40px;
+  color: #757575;
+  font-size: 18px;
+  font-family: Arial;
 }

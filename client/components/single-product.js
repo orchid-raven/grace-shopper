@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/products'
 import {addToCartThunk} from '../store/cart'
-import axios from 'axios'
 
 class SingleProduct extends Component {
   componentDidMount() {
@@ -11,26 +10,6 @@ class SingleProduct extends Component {
       this.props.match.params.id
     )
   }
-
-  //handleAddToCart = (evt, product) => {
-  // prevent default if submit
-  // take our current product
-  // find product id
-  // push that product ID into cart - use route somehow
-  // allow dupes
-
-  //evt.preventDefault()
-  //console.log('product', product)
-  // let product = this.props.product[0]
-  //invoke addToCart route
-  // await axios.put('/api/cart/add', {
-  //   id: product.id,
-  //   name: product.name,
-  //   price: product.price,
-  //   imgUrl: product.imgUrl
-  // })
-  // this.props.onAddToCart()
-  //}
 
   render() {
     let product = this.props.product[0]
@@ -68,7 +47,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getSingleProductThunk(itemType, id))
   },
   onAddToCart: product => {
-    console.log('onAddToCart is being called')
     dispatch(addToCartThunk(product))
   }
 })
