@@ -50,6 +50,10 @@ export const addToCartThunk = product => async dispatch => {
 export const checkoutCartThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cart/checkout')
+    console.log("DATA ----->",data);
+    if(data.length > 0) {
+      alert("Please Log in before checking out");
+    }
     dispatch(checkoutCart(data))
   } catch (error) {
     console.error(error)

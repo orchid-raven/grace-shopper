@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {AcquireCart, ClearIncompleteOrder, PopulateIncompleteOrder} = require('../utilities');
 const Order = require('../db/models/order')
 const OrderProduct = require('../db/models/order-product');
+const url = require('url');
 
 module.exports = router
 
@@ -52,7 +53,9 @@ router.get('/checkout', (req, res, next) => {
   try {
     if(!req.session.passport) {
       console.log("Please log in before checking out");
-      res.redirect('/login');
+      // res.send(alert("Please log in before checking out"));
+      res.json(req.session.cart);
+        // alert('Please log in before checking out');
     }
     else if (req.session.cart.length === 0) {
       console.log("Cannot checkout on Empty Cart");
