@@ -53,7 +53,9 @@ class Navbar extends Component {
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
               <Link to="/cart">
-                Cart<i className="fas fa-shopping-cart" />
+                Cart<i className="fas fa-shopping-cart" />({
+                  this.props.cart.length
+                })
               </Link>
             </div>
           )}
