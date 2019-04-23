@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getSingleProductThunk} from '../store/products'
+import {addToCartThunk} from '../store/cart'
 import axios from 'axios'
 
 class SingleProduct extends Component {
-
   componentDidMount() {
     this.props.onloadProduct(
       this.props.match.params.itemType,
@@ -12,20 +12,28 @@ class SingleProduct extends Component {
     )
   }
 
-  handleAddToCart = async (evt) => {
-    evt.preventDefault();
-    let product = this.props.product[0];
-    await axios.put('/api/cart/add',{
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      imgUrl: product.imgUrl
-    })
-  }
+  //handleAddToCart = (evt, product) => {
+  // prevent default if submit
+  // take our current product
+  // find product id
+  // push that product ID into cart - use route somehow
+  // allow dupes
+
+  //evt.preventDefault()
+  //console.log('product', product)
+  // let product = this.props.product[0]
+  //invoke addToCart route
+  // await axios.put('/api/cart/add', {
+  //   id: product.id,
+  //   name: product.name,
+  //   price: product.price,
+  //   imgUrl: product.imgUrl
+  // })
+  // this.props.onAddToCart()
+  //}
 
   render() {
     let product = this.props.product[0]
-    console.log('PRODUCT -> ', product)
     if (product) {
       return (
         <div className="single-product-item">
@@ -33,12 +41,12 @@ class SingleProduct extends Component {
 
           <div className="single-product-content">
             <div>{this.props.product[0].name}</div>
-            <div className="price">Price: ${product.price/100} </div>
+            <div className="price">Price: ${product.price / 100} </div>
 
             <button
               className="add-to-cart"
               type="submit"
-              onClick={this.handleAddToCart}
+              onClick={() => this.props.onAddToCart(product)}
             >
               Add To Cart
             </button>
@@ -58,6 +66,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onloadProduct: (itemType, id) => {
     dispatch(getSingleProductThunk(itemType, id))
+  },
+  onAddToCart: product => {
+    console.log('onAddToCart is being called')
+    dispatch(addToCartThunk(product))
   }
 })
 
