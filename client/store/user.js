@@ -50,6 +50,8 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     await axios.get('/api/cart/retrieveCart');
+    history.push('/cart');
+    history.push('/home');
   } catch (error) {
     console.log("cart from incomplete order did not load")
   }

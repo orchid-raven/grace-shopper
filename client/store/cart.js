@@ -64,6 +64,7 @@ export const checkoutCartThunk = () => async dispatch => {
       history.push(`/login`)
     }
     else {
+      dispatch(checkoutCart([]));
       history.push(`/receipt/${data.orderId}`)
     }
   } catch (error) {
