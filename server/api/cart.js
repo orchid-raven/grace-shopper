@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {AcquireCart, ClearIncompleteOrder, PopulateIncompleteOrder} = require('../utilities');
+const Order = require('../db/models/order')
+const OrderProduct = require('../db/models/order-product');
 
 module.exports = router
 
@@ -91,5 +93,11 @@ router.get('/archiveCart', (req, res, next) => {
 })
 
 router.get('/testground', async (req, res, next) => {
-  AcquireCart(req.session);
+  let prevOrder = await Order.findOne({where:{
+    userId: req.session.passport.user,
+    completedFlag: false
+  },
+  include: [{model: OrderProduct}]
+  });
+  res.json(prevOrder);
 })
