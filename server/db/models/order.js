@@ -6,8 +6,6 @@ const Order = db.define('order', {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
-
-  // A User may only have ONE incomplete order --- This is the cart at login / checkout / logout
   completedFlag: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
