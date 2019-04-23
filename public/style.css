@@ -21,13 +21,14 @@ button:focus {
 }
 
 nav {
-  background-color: #967bb6;
+  background-color: #b3c6e5;
   display: flex;
   align-items: center;
-  border-radius: 3px;
-  border: 1px solid #8e79a8;
-  font: bold 16px Arial;
+  /*border: 1px solid #8e79a8*/
+  font: bold 20px 'Khand';
   margin-bottom: 1%;
+  line-height: 1;
+  color: #4f0d91;
 }
 
 nav img {
@@ -38,12 +39,15 @@ nav img {
 .nav-right {
   display: flex;
   margin-left: auto;
+  align-items: flex-end;
   margin-right: 1%;
 }
 .nav-left {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-left: 20px;
+  width: 40%;
 }
 .nav-item {
   width: 10%;
@@ -51,6 +55,25 @@ nav img {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: #4f0d91;
+  border-bottom: 2px solid transparent;
+}
+a.nav-item {
+  margin: 0;
+  width: auto;
+}
+nav a:active {
+  color: #4f0d91;
+}
+nav a:visited {
+  color: #4f0d91;
+}
+nav a:hover {
+  border-bottom: 2px solid #4f0d91;
+}
+.logo,
+.logo:hover {
+  border-bottom: none;
 }
 
 form div {
