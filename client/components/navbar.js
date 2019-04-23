@@ -13,28 +13,28 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
-          <Link to="/home">
+          <Link className="logo" to="/home">
             <img src="/images/logo/Orchid-Raven-Logo.png" />
           </Link>
-          <div>
-            <div className="nav-left">
-              <Link className="nav-item" to="/products">
-                All Products
-              </Link>
-              <Link className="nav-item" to="/products/flower">
-                Flowers
-              </Link>
-              <Link className="nav-item" to="/products/seed">
-                Seeds
-              </Link>
-              <Link className="nav-item" to="/products/pot">
-                Pots
-              </Link>
-              <Link className="nav-item" to="/products/gardening%20equipment">
-                Gardening Equipment
-              </Link>
-            </div>
+
+          <div className="nav-left">
+            <Link className="nav-item" to="/products">
+              All Products
+            </Link>
+            <Link className="nav-item" to="/products/flower">
+              Flowers
+            </Link>
+            <Link className="nav-item" to="/products/seed">
+              Seeds
+            </Link>
+            <Link className="nav-item" to="/products/pot">
+              Pots
+            </Link>
+            <Link className="nav-item" to="/products/gardening%20equipment">
+              Gardening Equipment
+            </Link>
           </div>
+
           {this.props.isLoggedIn ? (
             <div className="nav-right">
               {/* The navbar will show these links after you log in */}
