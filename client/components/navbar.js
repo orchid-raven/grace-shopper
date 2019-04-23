@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {getCartItemsThunk} from '../store/cart'
+import {getCartItemsThunk, tempClearCart} from '../store/cart'
 class Navbar extends Component {
   componentDidMount() {
     this.props.onLoadCart()
@@ -78,6 +78,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(tempClearCart())
     },
     onLoadCart: () => {
       dispatch(getCartItemsThunk())
