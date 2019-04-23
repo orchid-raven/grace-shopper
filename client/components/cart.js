@@ -12,7 +12,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.cart);
     if (this.props.cart.length > 0) {
       return (
         <div className="cart-container">

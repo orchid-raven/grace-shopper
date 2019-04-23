@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 module.exports = router
 
-//GetAll
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -30,7 +29,6 @@ router.get('/:itemType/:id', async (req, res, next) => {
   }
 })
 
-
 router.get('/featured', async (req, res, next) => {
   try {
     const features = await Product.findAll({
@@ -44,7 +42,6 @@ router.get('/featured', async (req, res, next) => {
   }
 })
 
-// GetItemTypes
 router.get('/:itemType', async (req, res, next) => {
   try {
     const allItems = await Product.findAll({

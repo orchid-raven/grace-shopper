@@ -12,8 +12,6 @@ class OrderReceipt extends Component {
   render(){
     let {order} =  this.props
     let {products} =  this.props
-    console.log(this.props.order);
-    console.log(products);
 
     if(products[0]){
     return (

@@ -25,8 +25,6 @@ const AcquireCart = async (session) => {
       }
     }
   }
-
-  console.log(cart);
   return cart;
 }
 

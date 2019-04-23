@@ -54,9 +54,12 @@ export const checkoutCartThunk = () => async dispatch => {
     console.log("DATA ----->",data);
     if(data.length > 0) {
       alert("Please Log in before checking out");
-      dispatch(checkoutCart(data))
+      dispatch(checkoutCart(data));
+      history.push(`/login`)
     }
-    history.push(`/receipt/${data.orderId}`)
+    else {
+      history.push(`/receipt/${data.orderId}`)
+    }
   } catch (error) {
     console.error(error)
   }

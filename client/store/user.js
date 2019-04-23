@@ -53,7 +53,6 @@ export const auth = (email, password, method) => async dispatch => {
   } catch (error) {
     console.log("cart from incomplete order did not load")
   }
-
 }
 
 export const logout = () => async dispatch => {

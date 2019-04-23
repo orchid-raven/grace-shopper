@@ -51,19 +51,14 @@ router.put('/delete', (req, res, next) => {
 router.get('/checkout', async (req, res, next) => {
   try {
     if(!req.session.passport) {
-      console.log("Please log in before checking out");
-      // res.send(alert("Please log in before checking out"));
       res.json(req.session.cart);
-        // alert('Please log in before checking out');
     }
     else if (req.session.cart.length === 0) {
-      console.log("Cannot checkout on Empty Cart");
       res.redirect('/home');
     }
     else {
       let orderId = await PopulateIncompleteOrder(req.session, true);
       req.session.cart = [];
-      console.log("Return ---> ",orderId)
       res.send({orderId});
     }
   } catch (error) {
