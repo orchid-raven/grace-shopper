@@ -24,7 +24,7 @@ class OrderReceipt extends Component {
     <div>
       <h3>Order Receipt</h3>
       <h5>Invoice Number: {/* order.id */}</h5>
-      <table>
+      <table className = "ReceiptTable">
         <tr>
           <th>Item Name</th>
           <th>Quantity</th>
@@ -51,6 +51,20 @@ class OrderReceipt extends Component {
           </tr>
 
         */}
+
+
+          <tr>
+            <td>Rose</td>
+            <td>1</td>
+            <td>$12.00</td>
+            <td>$12.00</td>
+          </tr>
+
+          <tr>
+            <td colSpan="3">Grand Total: </td>
+            <td>$12.00</td>
+          </tr>
+
       </table>
     </div>);
   }

@@ -10,7 +10,8 @@ import {
   SingleProduct,
   AllProductsByType,
   FeaturedProducts,
-  Cart
+  Cart,
+  Receipt
 } from './components'
 import {me} from './store'
 
@@ -34,6 +35,7 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route path="/products/:itemType/:id" component={SingleProduct} />
         <Route path="/products/:itemType" component={AllProductsByType} />
+        <Route path="/receipt" component={Receipt} />
         <Route path="/cart" component={Cart} />
         <Route path="/home" component={UserHome} />
         {/* {isLoggedIn && (
