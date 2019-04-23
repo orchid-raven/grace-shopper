@@ -7,32 +7,50 @@ import {getFeaturedProductsThunk} from '../store/products'
  * COMPONENT
  */
 class UserHome extends Component {
-  // const {email} = props
-  // console.log(props);
   componentDidMount() {
     this.props.onLoadProducts()
   }
   render() {
-    return (
-      // <div>
-      //   <h3>Welcome, {email}</h3>
-      // </div>
-      <div>
-        <h2 className="featured-products-label">Featured Products</h2>
-        <div className="featured-container">
-          {this.props.featuredProducts.map(product => {
-            return (
-              <div className="featured-products" key={product.id}>
-                <div>{product.name}</div>
-                <div>
-                  <img src={product.imgUrl} />{' '}
+    if (this.props.email) {
+      return (
+        <div>
+          <div className="welcome-box">
+            <h3>Welcome, {this.props.email}</h3>
+          </div>
+          <h2 className="featured-products-label">Featured Products</h2>
+          <div className="featured-container">
+            {this.props.featuredProducts.map(product => {
+              return (
+                <div className="featured-products" key={product.id}>
+                  <div>{product.name}</div>
+                  <div>
+                    <img src={product.imgUrl} />{' '}
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <h2 className="featured-products-label">Featured Products</h2>
+          <div className="featured-container">
+            {this.props.featuredProducts.map(product => {
+              return (
+                <div className="featured-products" key={product.id}>
+                  <div>{product.name}</div>
+                  <div>
+                    <img src={product.imgUrl} />{' '}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )
+    }
   }
 }
 
@@ -40,9 +58,8 @@ class UserHome extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  // console.log('state', state);
   return {
-    // email: state.user.email
+    email: state.user.email,
     featuredProducts: state.products.featuredProducts
   }
 }
