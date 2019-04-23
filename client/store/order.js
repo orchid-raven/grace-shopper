@@ -19,13 +19,18 @@ export const getSingleOrderThunk = id => async dispatch => {
 
 const initialState = {
   orders: [],
-  singleOrder: {}
+  singleOrder: {
+    products: []
+  }
 }
 
 export default function (state = initialState, action) {
+  let newState = {...state}
   switch (action.type) {
     case GET_SINGLE_ORDER:
-      return {...state, singleOrder: action.order}
+      newState.singleOrder = action.order;
+      newState.singleOrder.products = action.order.products;
+      return newState;
     default:
       return state
   }

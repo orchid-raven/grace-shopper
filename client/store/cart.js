@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_CART_ITEMS = 'GET_CART_ITEMS'
 const ADD_TO_CART = 'ADD_TO_CART'
@@ -53,8 +54,9 @@ export const checkoutCartThunk = () => async dispatch => {
     console.log("DATA ----->",data);
     if(data.length > 0) {
       alert("Please Log in before checking out");
+      dispatch(checkoutCart(data))
     }
-    dispatch(checkoutCart(data))
+    history.push(`/receipt/${data.orderId}`)
   } catch (error) {
     console.error(error)
   }

@@ -104,6 +104,7 @@ const PopulateIncompleteOrder = async (session, completedFlag) => {
       totalPrice: ordertotalPrice
     });
 
+    return newOrder.id;
   }
 
 }

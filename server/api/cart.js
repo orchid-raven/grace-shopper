@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {AcquireCart, ClearIncompleteOrder, PopulateIncompleteOrder} = require('../utilities');
 const Order = require('../db/models/order')
 const OrderProduct = require('../db/models/order-product');
-const url = require('url');
 
 module.exports = router
 
@@ -49,7 +48,7 @@ router.put('/delete', (req, res, next) => {
   }
 })
 
-router.get('/checkout', (req, res, next) => {
+router.get('/checkout', async (req, res, next) => {
   try {
     if(!req.session.passport) {
       console.log("Please log in before checking out");
@@ -62,9 +61,10 @@ router.get('/checkout', (req, res, next) => {
       res.redirect('/home');
     }
     else {
-      PopulateIncompleteOrder(req.session, true);
+      let orderId = await PopulateIncompleteOrder(req.session, true);
       req.session.cart = [];
-      res.json([]);
+      console.log("Return ---> ",orderId)
+      res.send({orderId});
     }
   } catch (error) {
     next(error);
@@ -77,7 +77,6 @@ router.get('/retrieveCart', async (req, res, next) => {
     for (let i = 0; i < newCart.length; i++) {
       req.session.cart.push(newCart[i]);
     }
-    console.log("NEW CART ------> ",req.session.cart);
     ClearIncompleteOrder(req.session);
     res.send(newCart);
 

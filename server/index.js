@@ -70,6 +70,10 @@ const createApp = () => {
     next();
   })
 
+  app.use('/api/users', (req, res) => {
+    res.redirect('/')
+  });
+
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
