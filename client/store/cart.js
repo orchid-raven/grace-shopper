@@ -5,6 +5,7 @@ const GET_CART_ITEMS = 'GET_CART_ITEMS'
 const ADD_TO_CART = 'ADD_TO_CART'
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 const CHECKOUT_CART = 'CHECKOUT_CART'
+export const TEMP_CLEAR_CART = 'TEMP_CLEAR_CART'
 
 const getCartItems = cartItems => ({
   type: GET_CART_ITEMS,
@@ -25,6 +26,11 @@ const removeFromCart = newCart => ({
   type: REMOVE_FROM_CART,
   newCart
 })
+
+export const tempClearCart = () => ({
+  type: TEMP_CLEAR_CART
+})
+
 export const getCartItemsThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cart')
@@ -90,6 +96,8 @@ export default function(state = initialState, action) {
       return {...state, cart: action.cart}
     case REMOVE_FROM_CART:
       return {...state, cart: action.newCart}
+    case TEMP_CLEAR_CART:
+      return {...state, cart: []}
     default:
       return state
   }
